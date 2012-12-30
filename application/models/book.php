@@ -6,15 +6,16 @@ class book extends CI_Model {
 
 	function getAll() {
 		$query = $this->db
-			->select('b.id, b.title, b.rating, at.name AS author, b.category, b.reading_status')
+			->select('b.id, b.title, b.rating, at.name AS author, ct.name AS category, b.reading_status')
 			->join('authors at', 'b.author_id = at.id')
+			->join('categories ct', 'b.category_id = ct.id')
 			->get('books b');
 		return $query->result_array();
 	}
 
 	function getOne($id) {
 		$query = $this->db
-			->select('id, title, category, reading_status')
+			->select('id, title, author_id, category_id, reading_status')
 			->where('id', $id)
 			->get('books');
 		return $query->row_array();
@@ -35,8 +36,9 @@ class book extends CI_Model {
 
 	function getSearchResult($name, $author) {
 		$query = $this->db
-			->select('b.title, b.rating, at.name AS author, b.category, b.reading_status')
-			->join('authors at', 'b.author_id = at.id');
+			->select('b.title, b.rating, at.name AS author, ct.name AS category, b.reading_status')
+			->join('authors at', 'b.author_id = at.id')
+			->join('categories ct', 'b.category_id = ct.id');
 
 			if (!empty($author)) {
 				$this->db->like('b.author_id', $author);
@@ -49,7 +51,7 @@ class book extends CI_Model {
 			}
 			$query=  $this->db->get('books b');
 			return $query->result_array();
-	}
+		}
 }
 }
 ?>

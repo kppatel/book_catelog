@@ -12,23 +12,39 @@
 				<br>
 
 				<label for="category">Category</label>
-				<input id="category" name="category" type="text" value="<?php echo set_value('category') ?>">
-				<?php//	echo form_dropdown('category', $category); ?>
+				<?php echo form_dropdown('category', $category); ?>
 				<?php echo form_error('category') ?>
 				<br>
 
 				<label for="status">Reading Status</label>
-				<input id="status" name="status" type="text" value="<?php echo set_value('status') ?>">
-				<?php echo form_error('status') ?>
+				<?php
+					$options = array(
+                  'Read'  => 'Read',
+                  'Unread'    => 'Unread'
+                );
+					echo form_dropdown('status', $options)
+				?>
+
 				<br>
 
-				<label for="rating">Rating</label>
-				<input id="rating" name="rating" type="text" value="<?php echo set_value('rating') ?>">
+				<label>Rating</label>
+				<input type="radio" name="rating" class="rating" value="1" checked>
+				<input type="radio" name="rating" class="rating" value="2">
+				<input type="radio" name="rating" class="rating" value="3">
+				<input type="radio" name="rating" class="rating" value="4">
+				<input type="radio" name="rating" class="rating" value="5">
 				<?php echo form_error('rating') ?>
 				<br>
 
 				<input type="submit" value="Create">
 				<input type="reset">
-				<?php echo anchor('admin/books/index', 'Cancel') ?>
+				<?php echo anchor('books/index', 'Cancel') ?>
 			</fieldset>
 		</form>
+		<?php echo css('rating'), js('jquery'), js('rating') ?>
+
+<script>
+jQuery(function($) {
+	$('input.rating').rating();
+});
+</script>

@@ -11,7 +11,7 @@ class books extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->helper('assets');
+		$this->load->helper(array('form', 'assets'));
 		$data = array(
 			'data' => $this->book->getAll(),
 		);
@@ -23,12 +23,18 @@ class books extends CI_Controller {
 
 	public function edit($id)
 	{
-		$book = $this->book->getOne($id);
+		$data = array(
+			'book' => $this->book->getOne($id)
+		);
 
 		if (empty($book)) {
 			$this->session->set_flashdata('error', 'Book does not exist!');
 			redirect('books/index');
 		}
+		$data = array(
+			'author' => $this->assoc2numeric($this->author->getAll()),
+			'category' => $this->assoc2numeric($this->category->getAll())
+		);
 
 		$this->load->helper(array('form', 'assets', 'date'));
 		$this->load->library('form_validation', null, 'validation');
@@ -36,17 +42,17 @@ class books extends CI_Controller {
 
 		$this->validation
 			->set_rules('name', 'Name', 'trim|ucfirst|required')
-			->set_rules('category', 'Category', 'trim|required')
 			->set_rules('status', 'Status', 'trim|required');
 
 		if ($this->validation->run() == false) {
 			$this->template->set_layout('default')
 			->title('Book Catelog', 'Edit Book')
-			->build('books/edit', array('book' => $book));
+			->build('books/edit', $data);
 		} else {
 			$book=array(
 							'title' => $this->input->post('name'),
-							'category' => $this->input->post('category'),
+							'category_id' => $this->input->post('category'),
+							'author_id' => $this->input->post('author'),
 							'reading_status' => $this->input->post('status'),
 							'date_modified' => mdate("%d-%m-%Y", time())
 							);
@@ -61,6 +67,7 @@ class books extends CI_Controller {
 	{
 		$data = array(
 			'author' => $this->assoc2numeric($this->author->getAll()),
+			'category' => $this->assoc2numeric($this->category->getAll())
 		);
 
 		$this->load->helper(array('form', 'assets', 'date'));
@@ -79,9 +86,10 @@ class books extends CI_Controller {
 			$book=array(
 							'title' => $this->input->post('name'),
 							'author_id' => $this->input->post('author'),
-							'category' => $this->input->post('category'),
+							'category_id' => $this->input->post('category'),
 							'reading_status' => $this->input->post('status'),
-							'date_created' => mdate("%d-%m-%Y", time())
+							'date_created' => mdate("%d-%m-%Y", time()),
+							'rating' => $this->input->post('rating')
 							);
 			$this->book->create($book);
 			redirect('books/index');
