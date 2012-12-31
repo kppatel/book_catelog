@@ -1,5 +1,5 @@
 		<?php if(!empty($data)): ?>
-		<h3>Results</h3>
+		<h3>Categories</h3>
 		<?php echo anchor('categories/create', 'Create') ?>
 		<table class="list">
 			<thead>

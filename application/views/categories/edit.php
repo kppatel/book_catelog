@@ -1,4 +1,4 @@
-	<form action="" method="post">
+		<form action="" method="post">
 			<fieldset>
 				<legend>Edit Category</legend>
 				<label for="name">Name</label>

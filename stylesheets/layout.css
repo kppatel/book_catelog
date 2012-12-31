@@ -56,29 +56,30 @@
 	    font-weight: normal;
 	    font-style: normal; }
 display: inline;border-right: 1px solid #000;*/
+
 ul.menu
 {
-list-style-type:none;
-margin:0;
-padding:0;
-overflow:hidden;
-background: gainsboro
+	list-style-type:none;
+	margin:0;
+	padding:0 .8em;
+	overflow:hidden;
+	background: gainsboro;
 }
 
-ul.menu li a
-{
-width:60px;
-}
 ul.menu li
 {
 	margin: .5em .5em .5em -1px;
 	padding-right: .9em;
-	float: left
+	float: left;
 }
 
-ul.menu li:last-child
-{
-	border-right-width: 0;
+ul.menu li a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+ul.menu li a:hover {
+	text-decoration: underline;
 }
 
 table.list {

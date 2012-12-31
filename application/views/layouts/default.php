@@ -29,9 +29,9 @@
 		<h1>Book Catelog</h1>
 
 		<ul class="menu">
-			<li><?php echo anchor('categories', 'Categories') ?></li>
 			<li><?php echo anchor('books', 'Books') ?></li>
 			<li><?php echo anchor('authors', 'Authors') ?></li>
+			<li><?php echo anchor('categories', 'Categories') ?></li>
 			<li><?php echo anchor('books/search', 'Search') ?></li>
 		</ul>
 		<?php echo $template['body'] ?>

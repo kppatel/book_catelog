@@ -1,4 +1,4 @@
-	<form action="" method="post">
+		<form action="" method="post">
 			<fieldset>
 				<legend>Create Book</legend>
 				<label for="name">Title</label>
@@ -17,14 +17,10 @@
 				<br>
 
 				<label for="status">Reading Status</label>
-				<?php
-					$options = array(
-                  'Read'  => 'Read',
-                  'Unread'    => 'Unread'
-                );
-					echo form_dropdown('status', $options)
-				?>
-
+				<?php echo form_dropdown('status', array(
+								'Read'  => 'Read',
+								'Unread'    => 'Unread'
+							)) ?>
 				<br>
 
 				<label>Rating</label>
@@ -43,8 +39,8 @@
 		</form>
 		<?php echo css('rating'), js('jquery'), js('rating') ?>
 
-<script>
-jQuery(function($) {
-	$('input.rating').rating();
-});
-</script>
+		<script>
+		jQuery(function($) {
+			$('input.rating').rating();
+		});
+		</script>

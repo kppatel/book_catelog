@@ -1,4 +1,4 @@
-	<form action="" method="post">
+		<form action="" method="post">
 			<fieldset>
 				<legend>Search Book</legend>
 				<label for="name">Title</label>
@@ -14,7 +14,8 @@
 				<?php echo anchor('books/index', 'Cancel') ?>
 			</fieldset>
 		</form>
-<?php if(!empty($results)): ?>
+		
+		<?php if(!empty($results)): ?>
 		<table class="list">
 			<tr>
 				<th>Title</th>

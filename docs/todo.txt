@@ -1,0 +1,9 @@
+- database tables: author, category, books - done
+- list books, categories, authors	- done
+- edit, delete of books	- edit rating pending
+- edit, delete of categories - done
+- edit, delete of authors	- done
+- search book by any field - search by category pending
+- a star rating plugin of jquery for rating books - done
+- change category_id to category name in books table - done
+- mark read/unread using ajax - pending

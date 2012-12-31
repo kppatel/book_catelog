@@ -1,5 +1,5 @@
 		<?php if(!empty($data)): ?>
-		<h3>Results</h3>
+		<h3>Authors</h3>
 		<?php echo anchor('authors/create', 'Create') ?>
 		<table class="list">
 			<tr>
@@ -11,7 +11,7 @@
 
 			<?php foreach ($data as $r): ?>
 			<tr>
-				<td><?php echo $r['name'] ?></td>
+				<td><?php echo $r['name'], ' (', $r['books'], ')' ?></td>
 				<td><?php echo $r['date_created'] ?></td>
 				<td><?php echo $r['date_modified'] ?></td>
 				<td align="center"><?php echo anchor('authors/edit/' . $r['id'], 'Edit') ?></td>

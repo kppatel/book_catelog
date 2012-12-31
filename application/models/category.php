@@ -1,21 +1,25 @@
 <?php
+
 class Category extends CI_Model {
-  function __construct() {
-    parent::__construct();
-  }
+
+	function __construct() {
+		parent::__construct();
+	}
 
 	function getAll() {
 		$query = $this->db
-			->select('id, name, date_created, date_modified')
-			->get('categories');
+							->select('id, name, date_created, date_modified')
+							->get('categories');
+
 		return $query->result_array();
 	}
 
 	function getOne($id) {
 		$query = $this->db
-			->select('id, name, date_created, date_modified')
-			->where('id', $id)
-			->get('categories');
+							->select('id, name, date_created, date_modified')
+							->where('id', $id)
+							->get('categories');
+
 		return $query->row_array();
 	}
 

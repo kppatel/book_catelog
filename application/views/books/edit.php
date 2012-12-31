@@ -1,4 +1,4 @@
-<form action="" method="post">
+		<form action="" method="post">
 			<fieldset>
 				<legend>Edit Book</legend>
 				<label for="name">Title</label>
@@ -15,12 +15,10 @@
 				<br>
 
 				<label for="status">Reading Status</label>
-				<?php
-					$options = array(
-                  'Read'  => 'Read',
-                  'Unread'    => 'Unread'
-                );
-					echo form_dropdown('status', $options, $book['reading_status']); ?>
+				<?php echo form_dropdown('status', array(
+						'Read'  => 'Read',
+						'Unread'    => 'Unread'
+					), $book['reading_status']) ?>
 				<br>
 
 				<input type="hidden" name="id" value="<?php echo $book['id'] ?>">

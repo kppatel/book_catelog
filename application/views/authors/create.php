@@ -1,4 +1,4 @@
-	<form action="" method="post">
+		<form action="" method="post">
 			<fieldset>
 				<legend>Create Author</legend>
 				<label for="name">Name</label>
@@ -8,6 +8,6 @@
 
 				<input type="submit" value="Create">
 				<input type="reset">
-				<?php echo anchor('categories/index', 'Cancel') ?>
+				<?php echo anchor('authors/index', 'Cancel') ?>
 			</fieldset>
 		</form>

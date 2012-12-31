@@ -357,7 +357,6 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-
 $config['image_path']  = 'images/';
 $config['js_path']= 'js/';
 $config['css_path']= 'stylesheets/';
