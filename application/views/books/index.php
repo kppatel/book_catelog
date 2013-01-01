@@ -22,11 +22,11 @@
 					<?php
 						if($r['reading_status'] == 'Read') {
 							$js = 'onClick="changeStatus(\'Unread\')\"';
-							echo form_button('mybutton', 'Unread');
+							echo form_button('mybutton', 'Unread', $js);
 						 }
 						 else {
 							$js = 'onClick="changeStatus(\'Read\')\"';
-							echo form_button('mybutton', 'Read');
+							echo form_button('mybutton', 'Read', $js);
 						 }
 					?>
 				</td>
@@ -43,3 +43,28 @@
 			<?php endforeach ?>
 		</table>
 		<?php endif ?>
+	<script>
+		function changeStatus(current)
+		{
+			var currstatus=current;
+			alert(current);
+			var xmlhttp;
+			if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			}
+			else
+			{// code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function()
+			{
+				if (xmlhttp.readyState==4 && xmlhttp.status==200)
+				{
+					document.getElementById("myButton").innerHTML=xmlhttp.responseText;
+				}
+			}
+			xmlhttp.open("GET","changestatus.php?statusvalue="+current,true);
+			xmlhttp.send();
+	}
+	</script>

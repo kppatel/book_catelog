@@ -7,14 +7,18 @@
 
 				<label for="author">Author</label>
 				<?php	echo form_dropdown('author', $author); ?>
-
 				<br>
+
+				<label for="category">Category</label>
+				<?php	echo form_dropdown('category', $category); ?>
+				<br>
+
 				<input type="submit" value="Search">
 				<input type="reset">
 				<?php echo anchor('books/index', 'Cancel') ?>
 			</fieldset>
 		</form>
-		
+
 		<?php if(!empty($results)): ?>
 		<table class="list">
 			<tr>

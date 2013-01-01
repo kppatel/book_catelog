@@ -37,7 +37,7 @@ class book extends CI_Model {
 		$this->db->where('id', $id)->delete('books');
 	}
 
-	function getSearchResult($title, $author_id) {
+	function getSearchResult($title, $author_id, $category_id) {
 		$query = $this->db
 							->select('b.title, b.rating, at.name AS author, ct.name AS category, b.reading_status')
 							->join('authors at', 'b.author_id = at.id')
@@ -47,10 +47,15 @@ class book extends CI_Model {
 			$query->like('title', $title);
 		}
 
-		if (!empty($author_id)) {
+		if(!empty($category_id)) {
+			$query->where('b.category_id', $category_id);
+			if (!empty($author_id)) {
+			$query->or_where('b.author_id', $author_id);
+			}
+		}
+		else {
 			$query->where('b.author_id', $author_id);
 		}
-
 		$r = $query->get('books b');
 
 		return $r->result_array();

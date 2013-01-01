@@ -1,4 +1,4 @@
-		<form action="" method="post">
+<form action="" method="post" onload="checkStar('<?php echo $book['rating']; ?>')">
 			<fieldset>
 				<legend>Edit Book</legend>
 				<label for="name">Title</label>
@@ -19,6 +19,15 @@
 						'Read'  => 'Read',
 						'Unread'    => 'Unread'
 					), $book['reading_status']) ?>
+				<br
+
+					<label>Rating</label>
+				<input type="radio" name="rating" class="rating" value="1">
+				<input type="radio" name="rating" class="rating" value="2">
+				<input type="radio" name="rating" class="rating" value="3">
+				<input type="radio" name="rating" class="rating" value="4">
+				<input type="radio" name="rating" class="rating" value="5">
+				<?php echo form_error('rating') ?>
 				<br>
 
 				<input type="hidden" name="id" value="<?php echo $book['id'] ?>">
@@ -27,3 +36,11 @@
 				<?php echo anchor('books/index', 'Cancel') ?>
 			</fieldset>
 		</form>
+<?php echo css('rating'), js('jquery'), js('rating') ?>
+<script>
+		jQuery(function($) {
+			$('input.rating').rating();
+			$('input').rating('select',2)
+
+		});
+		</script>

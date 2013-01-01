@@ -55,7 +55,7 @@ class books extends CI_Controller {
 			redirect('books/index');
 		}
 	}
-	
+
 	public function edit($id) {
 		$book = $this->book->getOne($id);
 
@@ -113,15 +113,18 @@ class books extends CI_Controller {
 		$this->load->helper('form');
 
 		$data = array(
-			'author' => $this->assoc2numeric($this->author->getAll())
+			'author' => $this->assoc2numeric($this->author->getAll()),
+			'category' => $this->assoc2numeric($this->category->getAll()),
 		);
 
 		$data['author'] = array('Select Author') + $data['author'];
+		$data['category'] = array('Select Category') + $data['category'];
 
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
 			$name = $this->input->post('name');
 			$author = $this->input->post('author');
-			$data['results'] = $this->book->getSearchResult($name, $author);
+			$category = $this->input->post('category');
+			$data['results'] = $this->book->getSearchResult($name, $author, $category);
 		}
 
 		$this->template->set_layout('default')
