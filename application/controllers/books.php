@@ -87,6 +87,7 @@ class books extends CI_Controller {
 				'category_id' => $this->input->post('category'),
 				'author_id' => $this->input->post('author'),
 				'reading_status' => $this->input->post('status'),
+				'rating' => $this->input->post('rating'),
 				'date_modified' => date('Y-m-d')
 			);
 
@@ -130,6 +131,15 @@ class books extends CI_Controller {
 		$this->template->set_layout('default')
 			->title('Book Catelog', 'Search Book')
 			->build('books/search', $data);
+	}
+
+	public function toggle($id, $status) {
+		$this->book->changeStatus($id, $status);
+		if(!$this->input->is_ajax_request()) {
+			redirect('books/index');
+		}
+		
+		echo $status;
 	}
 
 	private function assoc2numeric(array $assoc) {
