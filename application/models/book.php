@@ -18,7 +18,7 @@ class book extends CI_Model {
 
 	function getOne($id) {
 		$query = $this->db
-							->select('id, title, author_id, category_id, reading_status')
+							->select('id, title, author_id, category_id, rating, reading_status')
 							->where('id', $id)
 							->get('books');
 
@@ -59,5 +59,9 @@ class book extends CI_Model {
 		$r = $query->get('books b');
 
 		return $r->result_array();
+	}
+	
+	function changeStatus($id,$status) {
+		$this->db->where('id',$id)->update('books',array('reading_status' => $status));
 	}
 }
