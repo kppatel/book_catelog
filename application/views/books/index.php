@@ -19,16 +19,10 @@
 				<td><?php echo $r['author'] ?></td>
 				<td><?php echo $r['category'] ?></td>
 				<td>
-					<?php
-						if($r['reading_status'] == 'Read') {
-							$js = 'onClick="changeStatus(\'Unread\')\"';
-							echo form_button('mybutton', 'Unread', $js);
-						 }
-						 else {
-							$js = 'onClick="changeStatus(\'Read\')\"';
-							echo form_button('mybutton', 'Read', $js);
-						 }
-					?>
+					<?php $toggle = $r['reading_status'] == 'Read' ? 'Unread' : 'Read'; echo anchor(
+						'books/toggle/'. $r['id'] . '/' . $toggle,
+						$r['reading_status'],
+						array('class' => 'toggler')) ?>
 				</td>
 				<td>
 					<?php
@@ -43,28 +37,25 @@
 			<?php endforeach ?>
 		</table>
 		<?php endif ?>
+
+		<?php echo js('jquery') ?>
+
 	<script>
-		function changeStatus(current)
-		{
-			var currstatus=current;
-			alert(current);
-			var xmlhttp;
-			if (window.XMLHttpRequest)
-		  {// code for IE7+, Firefox, Chrome, Opera, Safari
-				xmlhttp=new XMLHttpRequest();
-			}
-			else
-			{// code for IE6, IE5
-				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			xmlhttp.onreadystatechange=function()
-			{
-				if (xmlhttp.readyState==4 && xmlhttp.status==200)
-				{
-					document.getElementById("myButton").innerHTML=xmlhttp.responseText;
-				}
-			}
-			xmlhttp.open("GET","changestatus.php?statusvalue="+current,true);
-			xmlhttp.send();
-	}
+		jQuery(function($) {
+			$('a.toggler').click(function(e) {
+				var that = this;
+
+				$.ajax(that.href).success(function(data) {
+						if(data == 'Read') {
+							that.href = that.href.replace('Unread', data);							
+						} else {
+							that.href = that.href.replace('Read', data);
+						}
+						
+						$(that).text(data);
+					});
+
+					e.preventDefault();
+				});
+		});
 	</script>
