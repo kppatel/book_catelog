@@ -1,3 +1,4 @@
+
 <?php
 
 if (!defined('BASEPATH'))
@@ -138,8 +139,8 @@ class books extends CI_Controller {
 		if(!$this->input->is_ajax_request()) {
 			redirect('books/index');
 		}
-		
-		echo $status;
+
+		echo $status == 'Unread' ? 'Read' : 'Unread';
 	}
 
 	private function assoc2numeric(array $assoc) {

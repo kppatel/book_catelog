@@ -78,7 +78,7 @@ ul.menu li a {
 	font-weight: bold;
 }
 
-ul.menu li a:hover {
+ul.menu li a:hover, ul.menu li.current a {
 	text-decoration: underline;
 }
 
@@ -97,8 +97,19 @@ table.list th, table.list td {
 table.list tr {
 	background: #cccccc
 }
+
 table.list th {
 	color: wheat;
 	font-weight: bold;
 	background: gray;
+}
+
+#search-box label, #search-box input, #search-box select {
+	display: inline;
+	width: auto;
+	padding: 0;
+}
+
+#search-box input[type='submit'] {
+	padding: 3px 4px;
 }

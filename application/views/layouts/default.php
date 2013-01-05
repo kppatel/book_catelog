@@ -29,10 +29,10 @@
 		<h1>Book Catelog</h1>
 
 		<ul class="menu">
-			<li><?php echo anchor('books', 'Books') ?></li>
-			<li><?php echo anchor('authors', 'Authors') ?></li>
-			<li><?php echo anchor('categories', 'Categories') ?></li>
-			<li><?php echo anchor('books/search', 'Search') ?></li>
+			<li<?php echo $this->uri->segment(1) == 'books' ? ' class="current"': '' ?>><?php echo anchor('books', 'Books') ?></li>
+			<li<?php echo $this->uri->segment(1) == 'authors' ? ' class="current"': '' ?>><?php echo anchor('authors', 'Authors') ?></li>
+			<li<?php echo $this->uri->segment(1) == 'categories' ? ' class="current"': '' ?>><?php echo anchor('categories', 'Categories') ?></li>
+			<li<?php echo $this->uri->segment(2) == 'search' ? ' class="current"': '' ?>><?php echo anchor('books/search', 'Search') ?></li>
 		</ul>
 		<?php echo $template['body'] ?>
 	</div><!-- container -->

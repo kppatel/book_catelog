@@ -1,21 +1,16 @@
 		<form action="" method="post">
-			<fieldset>
+			<fieldset id="search-box">
 				<legend>Search Book</legend>
 				<label for="name">Title</label>
 				<input id="name" name="name" type="text">
-				<br>
 
 				<label for="author">Author</label>
 				<?php	echo form_dropdown('author', $author); ?>
-				<br>
 
 				<label for="category">Category</label>
 				<?php	echo form_dropdown('category', $category); ?>
-				<br>
 
 				<input type="submit" value="Search">
-				<input type="reset">
-				<?php echo anchor('books/index', 'Cancel') ?>
 			</fieldset>
 		</form>
 

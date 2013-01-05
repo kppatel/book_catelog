@@ -19,10 +19,13 @@
 				<td><?php echo $r['author'] ?></td>
 				<td><?php echo $r['category'] ?></td>
 				<td>
-					<?php $toggle = $r['reading_status'] == 'Read' ? 'Unread' : 'Read'; echo anchor(
-						'books/toggle/'. $r['id'] . '/' . $toggle,
-						$r['reading_status'],
-						array('class' => 'toggler')) ?>
+					<?php					
+						$toggle = $r['reading_status'] == 'Read' ? 'Unread' : 'Read'; 
+						echo anchor(
+							'books/toggle/'. $r['id'] . '/' . $toggle,
+							$r['reading_status'],
+							array('class' => 'toggler'));
+						?>
 				</td>
 				<td>
 					<?php
@@ -44,7 +47,7 @@
 		jQuery(function($) {
 			$('a.toggler').click(function(e) {
 				var that = this;
-
+				
 				$.ajax(that.href).success(function(data) {
 						if(data == 'Read') {
 							that.href = that.href.replace('Unread', data);							
@@ -54,7 +57,7 @@
 						
 						$(that).text(data);
 					});
-
+					
 					e.preventDefault();
 				});
 		});

@@ -1,6 +1,6 @@
 - database tables: author, category, books - done
 - list books, categories, authors	- done
-- edit, delete of books	- edit rating pending
+- edit, delete of books	- done
 - edit, delete of categories - done
 - edit, delete of authors	- done
 - search book by any field - done
