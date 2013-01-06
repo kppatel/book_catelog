@@ -7,7 +7,7 @@
 - a star rating plugin of jquery for rating books - done
 - change category_id to category name in books table - done
 - mark read/unread using ajax - pending
-- books delete using ajax - done
-- show books count in category listing - done
+- books delete using ajax - pending
+- show books count in category listing - pending
 - take git course at http://www.codeschool.com/courses/git-real - pending
 - check git video: http://git-scm.com/video/what-is-version-control

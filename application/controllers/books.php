@@ -108,7 +108,7 @@ class books extends CI_Controller {
 
 		$this->book->delete($id);
 
-		//redirect('books/index');
+		redirect('books/index');
 	}
 
 	public function search() {

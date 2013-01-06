@@ -8,10 +8,8 @@ class Category extends CI_Model {
 
 	function getAll() {
 		$query = $this->db
-							->select('c.id, c.name, c.date_created, c.date_modified, COUNT(b.category_id) AS books')
-							->join('books b', 'c.id = b.category_id', 'left')
-							->group_by('c.id')
-							->get('categories c');
+							->select('id, name, date_created, date_modified')
+							->get('categories');
 
 		return $query->result_array();
 	}

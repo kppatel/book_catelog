@@ -11,7 +11,7 @@
 
 			<?php foreach ($data as $r): ?>
 			<tr>
-				<td><?php echo $r['name'], ' (', $r['books'], ')' ?></td>
+				<td><?php echo $r['name'] ?></td>
 				<td><?php echo $r['date_created'] ?></td>
 				<td><?php echo $r['date_modified'] ?></td>
 				<td align="center"><?php echo anchor('categories/edit/' . $r['id'], 'Edit') ?></td>

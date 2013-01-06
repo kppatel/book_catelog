@@ -14,7 +14,7 @@
 
 	<!-- CSS
   ================================================== -->
-	<?php echo css('base'), css('skeleton'), css('layout') ?>
+	<?php echo css('base'), css('skeleton'), css('layout'), js('myfunction') ?>
 
 	<!-- Favicons
 	================================================== -->
