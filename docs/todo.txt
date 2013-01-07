@@ -11,3 +11,4 @@
 - show books count in category listing - done
 - take git course at http://www.codeschool.com/courses/git-real - pending
 - check git video: http://git-scm.com/video/what-is-version-control
+- if there is no record in book table than display No records - pending

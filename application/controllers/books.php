@@ -102,13 +102,22 @@ class books extends CI_Controller {
 		$book = $this->book->getOne($id);
 
 		if (empty($book)) {
-			$this->session->set_flashdata('error', 'Book does not exist!');
+			//if book does not exists and ajax request is made then send 500 internal server error response 
+			if($this->input->is_ajax_request()) {
+				header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+				exit;
+			}
+			else {
+				$this->session->set_flashdata('error', 'Book does not exist!');
+				redirect('books/index');
+			}
+		}
+				
+		$this->book->delete($id);
+		
+		if(!$this->input->is_ajax_request()) {
 			redirect('books/index');
 		}
-
-		$this->book->delete($id);
-
-		//redirect('books/index');
 	}
 
 	public function search() {

@@ -44,20 +44,19 @@ class book extends CI_Model {
 							->join('categories ct', 'b.category_id = ct.id');
 
 		if (!empty($title)) {
-			$query->like('title', $title);
+			$query->like('b.title', $title);
 		}
 
-		if(!empty($category_id)) {
+		if($category_id != '0') {
 			$query->where('b.category_id', $category_id);
-			if (!empty($author_id)) {
+			if ($author_id != '0') {
 			$query->or_where('b.author_id', $author_id);
 			}
 		}
-		else {
+		else if($category_id != '0' AND $author_id != '0'){
 			$query->where('b.author_id', $author_id);
 		}
 		$r = $query->get('books b');
-
 		return $r->result_array();
 	}
 	

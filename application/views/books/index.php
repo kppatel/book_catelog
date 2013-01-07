@@ -1,7 +1,7 @@
 	<h3>Books</h3>
 
 	<?php echo anchor('books/create', 'Create') ?>
-
+	<div id="error"></div>
 	<?php if(!empty($data)): ?>
 		<table class="list">
 			<tr>
@@ -35,7 +35,7 @@
 					?>
 				</td>
 				<td align="center"><?php echo anchor('books/edit/' . $r['id'], 'Edit') ?></td>
-				<td align="center"><?php echo anchor('#', 'Delete', array('class' => 'delete')) ?></td>
+				<td align="center"><?php echo anchor('books/delete/' . $r['id'], 'Delete', array('class' => 'delete')) ?></td>
 			</tr>
 			<?php endforeach ?>
 		</table>
@@ -60,31 +60,17 @@
 
 					e.preventDefault();
 				});
+				
+		$('a.delete').click(function(e)	{
+			e.preventDefault();
+			if (confirm("Are you sure to delete?"))	{
+				var parent = $(this).parent().parent();
+				$.ajax(this.href).success(function() {
+					parent.fadeOut('slow', function() {$(this).remove();});
+				}).fail(function(jqXHR, textStatus) {
+					$('#error').text(textStatus);
+				});
+			}
 		});
-	</script>
-	<script>
-
-$(document).ready(function()
-{
-	$('a.delete').click(function(e)
-	{
-		e.preventDefault();
-		if (confirm("Are you sure to delete?"))
-		{
-			var id = $(this).parent().parent().attr('id');
-			var parent = $(this).parent().parent();
-			$.ajax(
-			{
-				   type: "POST",
-				   url: 'books/delete/' + id,
-				   cache: false,
-
-				   success: function()
-					 {
-							parent.fadeOut('slow', function() {$(this).remove();});
-					 }
-			 });
-		}
 	});
-});
 	</script>
