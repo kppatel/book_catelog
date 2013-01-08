@@ -9,6 +9,12 @@
 - mark read/unread using ajax - pending
 - books delete using ajax - done
 - show books count in category listing - done
-- take git course at http://www.codeschool.com/courses/git-real - pending
-- check git video: http://git-scm.com/video/what-is-version-control
-- if there is no record in book table than display No records - pending
+- check git video: http://git-scm.com/video/what-is-version-control - pending
+- if there is no record in book table than display No records - done
+- study http://bonsaiden.github.com/JavaScript-Garden/ and prepare list of questions - pending
+
+personal todo
+-------------
+- implement multiple delete - pending
+- sorting in table listing
+- apply red / green color for read / unread status of book

@@ -3,8 +3,10 @@
 	<?php echo anchor('books/create', 'Create') ?>
 	<div id="error"></div>
 	<?php if(!empty($data)): ?>
+	<form action="<?php echo base_url() ?>multi_delete" method="post">
 		<table class="list">
 			<tr>
+				<th><input type="checkbox" id="check-toggler"></th>
 				<th>Title</th>
 				<th>Author</th>
 				<th>Category</th>
@@ -15,6 +17,7 @@
 
 			<?php foreach ($data as $r): ?>
 			<tr id="<?php echo $r['id'] ?>">
+				<td><input type="checkbox" name="multi_id[]" value="<?php echo $r['id'] ?>"></td>
 				<td><?php echo $r['title'] ?></td>
 				<td><?php echo $r['author'] ?></td>
 				<td><?php echo $r['category'] ?></td>
@@ -39,38 +42,51 @@
 			</tr>
 			<?php endforeach ?>
 		</table>
+		
+		<input type="submit" value="Delete Selected" class="single-button">
+		</form>
 		<?php endif ?>
 
 		<?php echo js('jquery') ?>
 
 	<script>
 		jQuery(function($) {
-			$('a.toggler').click(function(e) {
+			$('table').on('click', 'a.toggler', function(e) {
+				e.preventDefault();
 				var that = this;
 
 				$.ajax(that.href).success(function(data) {
-						if(data == 'Read') {
-							that.href = that.href.replace('Unread', data);
-						} else {
-							that.href = that.href.replace('Read', data);
-						}
+					if(data == 'Read') {
+						that.href = that.href.replace('Unread', data);
+					} else {
+						that.href = that.href.replace('Read', data);
+					}
 
-						$(that).text(data);
-					});
-
-					e.preventDefault();
+					$(that).text(data);
 				});
+
 				
-		$('a.delete').click(function(e)	{
-			e.preventDefault();
-			if (confirm("Are you sure to delete?"))	{
-				var parent = $(this).parent().parent();
-				$.ajax(this.href).success(function() {
-					parent.fadeOut('slow', function() {$(this).remove();});
-				}).fail(function(jqXHR, textStatus) {
-					$('#error').text(textStatus);
-				});
-			}
+			}).on('click', 'a.delete', function(e)	{
+				e.preventDefault();
+				if (confirm("Are you sure to delete?"))	{
+					var parent = $(this).parent().parent();					
+					
+					$.ajax(this.href).success(function() {
+						parent.fadeOut(function() {
+							if ($(this).siblings().length == 1) {
+								$(this).parent().append(
+									$('<tr />').append(
+										$('<td />').attr('colspan', '8').text('No record found')
+									)
+								).parent().next().hide();
+							}
+							$(this).remove();
+						});
+
+					}).fail(function(jqXHR, textStatus) {
+						$('#error').text(textStatus);
+					});
+				}
+			});
 		});
-	});
 	</script>
