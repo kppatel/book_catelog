@@ -26,6 +26,7 @@ class Author extends CI_Model {
 
 	function create($author) {
 		$this->db->insert('authors', $author);
+		return $this->db->insert_id();
 	}
 
 	function update($id, $author) {
