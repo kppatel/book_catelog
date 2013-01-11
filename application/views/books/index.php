@@ -3,7 +3,7 @@
 	<?php echo anchor('books/create', 'Create') ?>
 	<div id="error"></div>
 	<?php if(!empty($data)): ?>
-	<form action="<?php echo base_url() ?>multi_delete" method="post">
+	<form action="<?php echo base_url() ?>books/multi_delete" method="post">
 		<table class="list">
 			<tr>
 				<th><input type="checkbox" id="check-toggler"></th>
@@ -18,7 +18,7 @@
 			<?php foreach ($data as $r): ?>
 			<tr id="<?php echo $r['id'] ?>">
 				<td><input type="checkbox" name="multi_id[]" value="<?php echo $r['id'] ?>"></td>
-				<td><?php echo $r['title'] ?></td>
+				<td class="<?php echo $r['reading_status'] ?>"><?php echo $r['title'] ?></td>
 				<td><?php echo $r['author'] ?></td>
 				<td><?php echo $r['category'] ?></td>
 				<td>
@@ -42,7 +42,7 @@
 			</tr>
 			<?php endforeach ?>
 		</table>
-		
+
 		<input type="submit" value="Delete Selected" class="single-button">
 		</form>
 		<?php endif ?>
@@ -51,6 +51,9 @@
 
 	<script>
 		jQuery(function($) {
+			$("table tr Read").css("color","green");
+			$("Unread").css("color","red");
+
 			$('table').on('click', 'a.toggler', function(e) {
 				e.preventDefault();
 				var that = this;
@@ -65,12 +68,12 @@
 					$(that).text(data);
 				});
 
-				
+
 			}).on('click', 'a.delete', function(e)	{
 				e.preventDefault();
 				if (confirm("Are you sure to delete?"))	{
-					var parent = $(this).parent().parent();					
-					
+					var parent = $(this).parent().parent();
+
 					$.ajax(this.href).success(function() {
 						parent.fadeOut(function() {
 							if ($(this).siblings().length == 1) {

@@ -8,11 +8,35 @@ class Categories extends CI_Controller {
 	}
 
 	public function index() {
+		$this->load->helper('form');
 		$this->template->set_layout('default')
 			->title('Book Catelog', 'Category')
 			->build('categories/index', array(
 				'data' => $this->category->getAll()
 			));
+	}
+
+	public function ajax_create() {
+		if(!$this->input->is_ajax_request() && $_SERVER['REQUEST_METHOD'] != 'POST') {
+			header($_SERVER['SERVER_PROTOCOL'] . '404 Internal Server Error', true, 404);
+			exit;
+		}
+
+		$name = $this->input->post('name');
+
+		if (empty($name)) {
+			header($_SERVER['SERVER_PROTOCOL'] . '500 Internal Server Error', true, 500);
+			exit;
+		}
+
+		$id = $this->category->create(array(
+			'name' => $name,
+			'date_created' => date('Y-m-d')
+		));
+
+		$category = $this->category->getOne($id);
+		echo json_encode($category);
+		exit;
 	}
 
 	public function create() {

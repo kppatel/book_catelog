@@ -27,6 +27,7 @@ class Category extends CI_Model {
 
 	function create($category) {
 		$this->db->insert('categories', $category);
+		return $this->db->insert_id();
 	}
 
 	function update($id, $category) {
