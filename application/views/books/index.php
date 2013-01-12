@@ -6,7 +6,7 @@
 	<form action="<?php echo base_url() ?>books/multi_delete" method="post">
 		<table class="list">
 			<tr>
-				<th><input type="checkbox" id="check-toggler"></th>
+				<th>#</th>
 				<th>Title</th>
 				<th>Author</th>
 				<th>Category</th>
@@ -51,8 +51,8 @@
 
 	<script>
 		jQuery(function($) {
-			$("table tr Read").css("color","green");
-			$("Unread").css("color","red");
+			$("td.Read").css("color","green");
+			$("td.Unread").css("color","red");
 
 			$('table').on('click', 'a.toggler', function(e) {
 				e.preventDefault();

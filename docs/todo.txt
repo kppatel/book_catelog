@@ -12,10 +12,10 @@
 - check git video: http://git-scm.com/video/what-is-version-control - pending
 - if there is no record in book table than display No records - done
 - study http://bonsaiden.github.com/JavaScript-Garden/ and prepare list of questions - pending
-- add ajax add in categories done
+- add ajax add in categories - done
 
 personal todo
 -------------
 - implement multiple delete - done
 - sorting in table listing
-- apply red / green color for read / unread status of book
+- apply red / green color for read / unread status of book - done
