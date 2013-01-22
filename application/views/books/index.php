@@ -5,16 +5,17 @@
 	<?php if(!empty($data)): ?>
 	<form action="<?php echo base_url() ?>books/multi_delete" method="post">
 		<table class="list">
-			<tr>
+			<thead>
 				<th>#</th>
-				<th>Title</th>
-				<th>Author</th>
-				<th>Category</th>
-				<th>Reading Status</th>
-				<th>Rating</th>
+				<th data-sort="string">Title</th>
+				<th data-sort="string">Author</th>
+				<th data-sort="string">Category</th>
+				<th data-sort="string">Reading Status</th>
+				<th data-sort="integer">Rating</th>
 				<th colspan="2">Actions</th>
-			</tr>
+			</thead>
 
+			<tbody>
 			<?php foreach ($data as $r): ?>
 			<tr id="<?php echo $r['id'] ?>">
 				<td><input type="checkbox" name="multi_id[]" value="<?php echo $r['id'] ?>"></td>
@@ -41,6 +42,7 @@
 				<td align="center"><?php echo anchor('books/delete/' . $r['id'], 'Delete', array('class' => 'delete')) ?></td>
 			</tr>
 			<?php endforeach ?>
+			</tbody>
 		</table>
 
 		<input type="submit" value="Delete Selected" class="single-button">
@@ -49,12 +51,21 @@
 		<p>No records found.</p>
 		<?php endif ?>
 
-		<?php echo js('jquery') ?>
+		<?php echo js('jquery'), js('stupidtable') ?>
 
 	<script>
 		jQuery(function($) {
 			$("td.Read").css("color","green");
 			$("td.Unread").css("color","red");
+
+			$('table.list').stupidtable().bind('aftertablesort', function (event, data) {
+        var th = $(this).find("th");
+        th.find(".arrow").remove();
+        var arrow = data.direction === "asc" ? "&uarr;" : "&darr;";
+        th.eq(data.column).append('<span class="arrow">' + arrow +'</span>');
+      }).on('click', 'a.delete', function() {
+				return confirm("Are you sure to delete this author");
+			});
 
 			$('table').on('click', 'a.toggler', function(e) {
 				e.preventDefault();
