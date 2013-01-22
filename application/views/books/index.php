@@ -6,7 +6,7 @@
 	<form action="<?php echo base_url() ?>books/multi_delete" method="post">
 		<table class="list">
 			<thead>
-				<th>#</th>
+				<th><input type="checkbox" id='selectall'></th>
 				<th data-sort="string">Title</th>
 				<th data-sort="string">Author</th>
 				<th data-sort="string">Category</th>
@@ -18,7 +18,7 @@
 			<tbody>
 			<?php foreach ($data as $r): ?>
 			<tr id="<?php echo $r['id'] ?>">
-				<td><input type="checkbox" name="multi_id[]" value="<?php echo $r['id'] ?>"></td>
+				<td><input type="checkbox" name="multi_id[]" value="<?php echo $r['id'] ?>" class="case"></td>
 				<td class="<?php echo $r['reading_status'] ?>"><?php echo $r['title'] ?></td>
 				<td><?php echo $r['author'] ?></td>
 				<td><?php echo $r['category'] ?></td>
@@ -105,4 +105,23 @@
 				}
 			});
 		});
+		$(function(){
+
+	// add multiple select / deselect functionality
+	$("#selectall").click(function () {
+		  $('.case').attr('checked', this.checked);
+	});
+
+	// if all checkbox are selected, check the selectall checkbox
+	// and viceversa
+	$(".case").click(function(){
+
+		if($(".case").length == $(".case:checked").length) {
+			$("#selectall").attr("checked", "checked");
+		} else {
+			$("#selectall").removeAttr("checked");
+		}
+
+	});
+});
 	</script>
