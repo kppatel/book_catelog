@@ -15,10 +15,8 @@
 				<br>
 
 				<label for="status">Reading Status</label>
-				<?php echo form_dropdown('status', array(
-						'Read'  => 'Read',
-						'Unread'    => 'Unread'
-					), $book['reading_status']) ?>
+				<input type="radio" name="status" value="Read"<?php echo $book['reading_status'] == 'Read' ? ' checked' : '' ?>>Read
+				<input type="radio" name="status" value="Unread"<?php echo $book['reading_status'] == 'Unread' ? ' checked' : '' ?>>Unread
 				<br>
 
 				<label>Rating</label>

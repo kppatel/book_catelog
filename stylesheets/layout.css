@@ -118,3 +118,7 @@ input.single-button {
 	display: block;
 	margin-top: 10px;
 }
+
+th[data-sort]{
+	cursor:pointer;
+}

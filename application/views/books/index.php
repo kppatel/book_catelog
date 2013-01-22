@@ -45,6 +45,8 @@
 
 		<input type="submit" value="Delete Selected" class="single-button">
 		</form>
+		<?php else: ?>
+		<p>No records found.</p>
 		<?php endif ?>
 
 		<?php echo js('jquery') ?>

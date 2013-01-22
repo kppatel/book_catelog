@@ -1,4 +1,3 @@
-		<?php if(!empty($data)): ?>
 		<h3>Categories</h3>
 		<?php echo anchor('categories/create', 'Create', array('id' => 'create-toggler')) ?>
 		<div id="create-category">
@@ -17,30 +16,40 @@
 		</form>
 		</div>
 
+		<?php if(!empty($data)): ?>
 		<table class="list">
 			<thead>
-				<th>Name</th>
-				<th>Date Created</th>
-				<th>Date Modified</th>
+				<th data-sort="string">Name</th>
+				<th data-sort="date">Date Created</th>
+				<th data-sort="date">Date Modified</th>
 				<th colspan="2">Actions</th>
 			</thead>
-
-			<?php foreach ($data as $r): ?>
-			<tr>
-				<td><?php echo $r['name'], ' (', $r['books'], ')' ?></td>
-				<td><?php echo $r['date_created'] ?></td>
-				<td><?php echo $r['date_modified'] ?></td>
-				<td align="center"><?php echo anchor('categories/edit/' . $r['id'], 'Edit') ?></td>
-				<td align="center"><?php echo anchor('categories/delete/' . $r['id'], 'Delete') ?></td>
-			</tr>
-			<?php endforeach ?>
+			
+			<tbody>
+				<?php foreach ($data as $r): ?>
+				<tr>
+					<td><?php echo $r['name'], ' (', $r['books'], ')' ?></td>
+					<td><?php echo $r['date_created'] ?></td>
+					<td><?php echo $r['date_modified'] ?></td>
+					<td align="center"><?php echo anchor('categories/edit/' . $r['id'], 'Edit') ?></td>
+					<td align="center"><?php echo anchor('categories/delete/' . $r['id'], 'Delete') ?></td>
+				</tr>
+				<?php endforeach ?>
+			</tbody>
 		</table>
+		<?php else: ?>
+		<p>No records found.</p>
 		<?php endif ?>
 
-		<?php echo js('jquery') ?>
+		<?php echo js('jquery'), js('stupidtable') ?>
 		<script>
 		jQuery(function($) {
-			$('table.list').on('click', 'a.delete', function() {
+			$('table.list').stupidtable().bind('aftertablesort', function (event, data) {
+        var th = $(this).find("th");
+        th.find(".arrow").remove();
+        var arrow = data.direction === "asc" ? "&uarr;" : "&darr;";
+        th.eq(data.column).append('<span class="arrow">' + arrow +'</span>');
+      }).on('click', 'a.delete', function() {
 				return confirm("Are you sure to delete this category");
 			});
 
